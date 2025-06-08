@@ -4,7 +4,7 @@
   "description": "Backend server for expense tracker dashboard",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "jest"
   },

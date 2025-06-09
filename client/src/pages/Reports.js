@@ -1,3 +1,6 @@
+import InfoIcon from '@mui/icons-material/Info';
+import ErrorIcon from '@mui/icons-material/Error';
+
 import React, { useState, useEffect } from 'react';
 import {
   Box,

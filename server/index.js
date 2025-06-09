@@ -25,13 +25,17 @@ app.options('*', cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// ✅ Connect to MongoDB (e.g., Atlas or local fallback)
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker', {
+const uri = process.env.MONGODB_URI;
+if (!uri) {
+  console.error('ERROR: MONGODB_URI not set!');
+  process.exit(1); // stop app if no URI
+}
+
+mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => console.log('✅ MongoDB connected successfully'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+
 
 // Import routes
 const authRoutes = require('./routes/auth');

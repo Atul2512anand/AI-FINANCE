@@ -16,13 +16,21 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/expense-tracker', {
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config();
+
+if (!process.env.MONGODB_URI) {
+  console.error('❌ ERROR: MONGODB_URI not set!');
+  process.exit(1);
+}
+
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
-  .then(() => console.log('MongoDB connected successfully'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+.then(() => console.log('✅ MongoDB connected successfully'))
+.catch((err) => console.error('❌ MongoDB connection error:', err));
 
 // Import routes
 const authRoutes = require('./routes/auth');

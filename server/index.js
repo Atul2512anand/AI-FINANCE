@@ -16,9 +16,6 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
 
 if (!process.env.MONGODB_URI) {
   console.error('❌ ERROR: MONGODB_URI not set!');
